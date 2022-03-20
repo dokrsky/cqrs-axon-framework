@@ -125,3 +125,14 @@
 ![img_6.png](img_6.png) (69. Refactor Command API Rest Controller)
 - 현재까지 command, core, query 3개의 패키지로 분리되어있다.
 - 추후에 2개의 마이크로서비스로 분리한다면 command, query 패키지로 분리되고 core 는 서로 공유할 것이다.
+
+- Query Controller 에서 client 에게 반환 될 class 는 하나의 책임만 가지도록 할 것이다. [ProductRestModel](./ProductsService/src/main/java/com/appsdeveloperblog/estore/ProductsService/query/rest/ProductsQueryController.java)
+  - Event 로 받은 항목은 기본적으로 전달하고 추가적인 정보가 있을 수 있으므로 우선 [ProductCreatedEvent](./ProductsService/src/main/java/com/appsdeveloperblog/estore/ProductsService/core/event/ProductCreatedEvent.java) ProductCreatedEvent.java 와 동일하게 정보를 선언한다.
+
+- 이전 강의에서도 봤다시피 command 를 command Bus 로 전달하고 Query handler 가 이를 처리했다. 또한 command 는 일부 정보를 포함한 단순한 java class 이고, query model 도 유사하다.
+- 그래서 query 를 위한 java class 를 생성한다. ([FindProductsQuery](./ProductsService/src/main/java/com/appsdeveloperblog/estore/ProductsService/query/FindProductsQuery.java))
+  - query class 는 query 를 수행하기위한 몇가지 정보를 전달한다.
+  - ex) sort 정보, paging 정보, page 에 단길 item 갯수정보 등
+  - 이 강의에선 매우 간단한 예제이므로 아무런 정보도 선언하지 않는다.
+
+- [ProductsQueryController](./ProductsService/src/main/java/com/appsdeveloperblog/estore/ProductsService/query/rest/ProductsQueryController.java) 에서 쿼리를 query bus 로 전달해야하는 데, 이 때 query Gateway 가 필요하다. (나머지는 직접 검색해보자.)
