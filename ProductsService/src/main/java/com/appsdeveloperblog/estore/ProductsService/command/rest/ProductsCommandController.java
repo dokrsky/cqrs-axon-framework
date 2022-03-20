@@ -1,6 +1,7 @@
-package com.appsdeveloperblog.estore.ProductsService.rest;
+package com.appsdeveloperblog.estore.ProductsService.command.rest;
 
 import com.appsdeveloperblog.estore.ProductsService.command.CreateProductCommand;
+import com.appsdeveloperblog.estore.ProductsService.rest.CreateProductRestModel;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,12 +13,12 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/products")
-public class ProductsController {
+public class ProductsCommandController {
 
     private final Environment env;
     private final CommandGateway commandGateway;
 
-    public ProductsController(Environment env, CommandGateway commandGateway) {
+    public ProductsCommandController(Environment env, CommandGateway commandGateway) {
         this.env = env;
         this.commandGateway = commandGateway;
     }

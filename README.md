@@ -16,7 +16,7 @@
 ![img_2.png](img_2.png)
 - Command Bus 로 command 가 전달되고, Command Bus 에서 이를 dispatch 한다.
   - CommandHandler 로 전달하거나 예외를 던지거나
-- [CommandGateWay](./ProductsService/src/main/java/com/appsdeveloperblog/estore/ProductsService/rest/ProductsController.java) bean 추가
+- [CommandGateWay](./ProductsService/src/main/java/com/appsdeveloperblog/estore/ProductsService/command/rest/ProductsCommandController.java) bean 추가
   - send, sendAndWait 라는 비동기, 동기 호출 방법이 있다.
 - 반환되는 값은 productId 이다.
 
@@ -117,7 +117,7 @@
   - RestController -> Query Handler -> h2 DB 순서로 동작한다.
   - 먼저 Client 가 Http Request 를 요청하고, RestController 가 Query Bus 에 이를 전달하고 이전에 말한 것과 동일하게 동작한다.
 
-- 기존에 ProductsController (Create 를 위한) 가 있지만, Modify 를 위한 Controller 를 새로 생성할 것  [ProductsQueryController](./ProductsService/src/main/java/com/appsdeveloperblog/estore/ProductsService/query/rest/ProductsQueryController.java)
+- 기존에 ProductsCommandController (Create 를 위한) 가 있지만, Modify 를 위한 Controller 를 새로 생성할 것  [ProductsQueryController](./ProductsService/src/main/java/com/appsdeveloperblog/estore/ProductsService/query/rest/ProductsQueryController.java)
   - 즉, 하나는 Command API, 다른 하나는 Query API
   - 또한 필요 시 Command Microservice, Query Microservice 로 분리할 수도 있다.
   
